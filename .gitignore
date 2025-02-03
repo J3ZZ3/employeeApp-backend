@@ -1,3 +1,6 @@
 .env
 node_modules
 serviceAccount.json
+config/serviceAccount.json
+*.pem
+*.key
