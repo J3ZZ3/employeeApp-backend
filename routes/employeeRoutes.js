@@ -59,4 +59,18 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// Get All Employees
+router.get('/', async (req, res) => {
+  try {
+    const employeesSnapshot = await db.collection('employees').get();
+    const employees = [];
+    employeesSnapshot.forEach(doc => {
+      employees.push({ id: doc.id, ...doc.data() });
+    });
+    res.json(employees);
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to fetch employees', error: error.message });
+  }
+});
+
 module.exports = router;

@@ -4,14 +4,14 @@ const serviceAccount = require('../serviceAccount.json');
 try {
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    storageBucket: 'your-firebase-bucket-name.appspot.com',
+    storageBucket: 'employee-app-node-cbb49.firebasestorage.app'
   });
-  console.log("Firebase initialized successfully.");
+
+  const db = admin.firestore();
+  const bucket = admin.storage().bucket();
+
+  module.exports = { db, bucket };
 } catch (error) {
-  console.error("Error initializing Firebase:", error);
+  console.error('Error initializing Firebase:', error);
+  throw error;
 }
-
-const db = admin.firestore();
-const bucket = admin.storage().bucket();
-
-module.exports = { db, bucket };
